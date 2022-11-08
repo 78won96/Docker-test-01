@@ -1,13 +1,7 @@
-FROM alpine:3.14
+FROM ubuntu:16.04
 
-WORKDIR /app
+RUN apt-get update && apt-get install -y vim apache2
 
-COPY package.json package-lock.json ./
+ENV PASSWORD = secret
 
-RUN npm ci
-
-COPY index.js .
-
-ENTRYPOINT [ "node", "index.js" ]
-
-
+CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"]
